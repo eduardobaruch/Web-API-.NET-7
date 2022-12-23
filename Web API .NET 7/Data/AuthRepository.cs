@@ -104,7 +104,7 @@ namespace Web_API_.NET_7.Data
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = creds
             };
 

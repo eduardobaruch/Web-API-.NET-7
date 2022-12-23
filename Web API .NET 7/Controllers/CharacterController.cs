@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Web_API_.NET_7.Models;
 using Web_API_.NET_7.Services.CharacterService;
 
@@ -17,6 +18,7 @@ namespace Web_API_.NET_7.Controllers
         {
             _characterService= characterService;
         }
+
         
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()

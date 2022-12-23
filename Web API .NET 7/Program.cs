@@ -6,6 +6,8 @@ global using Microsoft.EntityFrameworkCore;
 using Web_API_.NET_7.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,18 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = """Standard Authorization header using the Bearer Scheme. Example: "bearer {token}" """,
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 // Register AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
@@ -38,6 +51,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
