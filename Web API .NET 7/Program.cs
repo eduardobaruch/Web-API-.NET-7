@@ -41,7 +41,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IWeaponService, WeaponService>();
-builder.Services.AddScoped<IFightService, fight>();
+builder.Services.AddScoped<IFightService, FightService>();
 
 // Add JWT Authentication Scheme
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
