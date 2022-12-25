@@ -32,7 +32,7 @@ namespace Web_API_.NET_7.Controllers
             return Ok(await _characterService.GetCharacterById(id));
         }
 
-        [HttpPost]
+        [HttpPost("AddCharacter")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> AddCharacter(AddCharacterDto newChar) 
         {
             return Ok(await _characterService.AddCharacter(newChar));
@@ -53,6 +53,17 @@ namespace Web_API_.NET_7.Controllers
         {
             var response = await _characterService.DeleteCharacter(id);
             if (response.Data is null)
+                return NotFound(response);
+
+            return Ok(response);
+        }
+
+        [HttpPost("SKill")]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> AddCharacter(AddCharacterSkillDto newCharacterSkill)
+        {
+            var response = await _characterService.AddCharacterSkill(newCharacterSkill);
+            
+            if (response.Success == false) 
                 return NotFound(response);
 
             return Ok(response);

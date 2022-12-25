@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using Web_API_.NET_7.Services.WeaponService;
+using Web_API_.NET_7.Services.FightService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // AddScoped
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IWeaponService, WeaponService>();
+builder.Services.AddScoped<IFightService, FightService>();
 
 // Add JWT Authentication Scheme
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

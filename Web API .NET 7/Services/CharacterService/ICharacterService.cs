@@ -7,6 +7,7 @@
         Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newChar);
         Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updatedChar);
         Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id);
+        Task<ServiceResponse<GetCharacterDto>> AddCharacterSkill(AddCharacterSkillDto newCharacterSKill);
 
     }
 }

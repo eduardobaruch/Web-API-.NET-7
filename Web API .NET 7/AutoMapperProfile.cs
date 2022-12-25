@@ -1,4 +1,7 @@
-﻿namespace Web_API_.NET_7
+﻿using Web_API_.NET_7.Dto.Fight;
+using Web_API_.NET_7.Dto.Skill;
+
+namespace Web_API_.NET_7
 {
     public class AutoMapperProfile : Profile
     {
@@ -6,6 +9,9 @@
         {
             CreateMap<Character, GetCharacterDto>();
             CreateMap<AddCharacterDto, Character>();
+            CreateMap<Weapon, GetWeaponDto>();
+            CreateMap<Skill, GetSkillDto>();
+            CreateMap<Character, HighScoreDto>();
         }
     }
 }
