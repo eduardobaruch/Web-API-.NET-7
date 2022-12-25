@@ -37,7 +37,7 @@ namespace Web_API_.NET_7.Services.WeaponService
                 var weapon = new Weapon()
                 {
                     Name = newWeapon.Name,
-                    Demage = newWeapon.Demage,
+                    Damage = newWeapon.Demage,
                     Character = character
                 };
                 

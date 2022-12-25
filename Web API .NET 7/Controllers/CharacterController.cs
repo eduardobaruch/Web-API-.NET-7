@@ -26,6 +26,7 @@ namespace Web_API_.NET_7.Controllers
             return Ok(await _characterService.GetAllCharacters());
         }
 
+        [Authorize(Roles = "Admin, Player")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> GetCharacterById(int id)
         {

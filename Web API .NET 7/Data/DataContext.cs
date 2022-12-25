@@ -14,6 +14,10 @@
                 new Skill { Id = 2, Name = "Frenzy", Damage = 20 },
                 new Skill { Id = 3, Name = "Blizzard", Damage = 50 }
                 );
+
+            //Adding player to all Role user that is null
+            modelBuilder.Entity<User>()
+                .Property(user => user.Role).HasDefaultValue("Player");
         }
 
         // Making the Characters created at databse

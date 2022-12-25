@@ -7,10 +7,12 @@ namespace Web_API_.NET_7.Services.FightService
     public class FightService : IFightService
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public FightService(DataContext context)
+        public FightService(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<ServiceResponse<AttackResultDto>> WeaponAttack(WeaponAttackDto request)
@@ -198,15 +200,20 @@ namespace Web_API_.NET_7.Services.FightService
             return response;
         }
 
-        [HttpGet]
+        
         public async Task<ServiceResponse<List<HighScoreDto>>> GetHighScore()
         {
             var response = new ServiceResponse<List<HighScoreDto>>();
-            response.Data = new List<HighScoreDto>();
-
             try
             {
+                 var characters = await _context.Characters
+                    .Where(C => C.Fights > 0)
+                    .OrderByDescending(C => C.Victories)
+                    .ThenBy(C => C.Defeats)
+                    .ToListAsync();
 
+
+                response.Data = characters.Select(c => _mapper.Map<HighScoreDto>(c)).ToList();
             }
             catch (Exception ex)
             {
